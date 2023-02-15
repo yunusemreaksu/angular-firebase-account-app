@@ -12,11 +12,11 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(user: User) {
-    this.http.post<User>(environment.usersApiUrl, user);
+    return this.http.post<User>(environment.usersApiUrl, user);
   }
 
   signup(user: User) {
-    this.http.post<User>(environment.usersApiUrl, user).pipe(
+    return this.http.post<User>(environment.usersApiUrl, user).pipe(
       tap((newUser) => {
         this.users = [...this.users, newUser];
       })

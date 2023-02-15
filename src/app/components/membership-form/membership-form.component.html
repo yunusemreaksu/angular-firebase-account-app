@@ -1,10 +1,14 @@
 <form class="membership-form" #form="ngForm">
   <header [innerHTML]="currentRoute === '/login' ? 'Please Login' : 'Please Sign Up'"></header>
   <label for="email">
-    <input type="email" name="email" required placeholder="E-mail:">
+    <input type="email" name="email" required placeholder="E-mail:" #email="ngModel" [ngModel]="user?.email">
   </label>
   <label for="password">
-    <input type="password" name="password" required minlength="5" placeholder="Password:">
+    <input type="password" name="password" required minlength="5" placeholder="Password:" #password="ngModel"
+      [ngModel]="user?.password">
   </label>
-  <button type="submit" [innerHTML]="currentRoute === '/login' ? 'Login' : 'Sign Up'"></button>
+  <div>
+    <button type="button" *ngIf="currentRoute === '/login'" (click)="handleLogin(form)">Login</button>
+    <button type="button" *ngIf="currentRoute === '/signup'" (click)="handleSignup(form)">Sign Up</button>
+  </div>
 </form>
