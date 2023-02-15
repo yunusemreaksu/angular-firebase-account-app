@@ -1,0 +1,11 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 2px solid black;
+}
+
+.right-container {
+  display: flex;
+  gap: 1rem;
+}
