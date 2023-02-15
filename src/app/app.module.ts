@@ -7,9 +7,10 @@ import { AppComponent } from './app.component';
 import { AppbarComponent } from './components/appbar/appbar.component';
 import { LoginComponent } from './containers/login/login.component';
 import { SignupComponent } from './containers/signup/signup.component';
+import { MembershipFormComponent } from './components/membership-form/membership-form.component';
 
 @NgModule({
-  declarations: [AppComponent, AppbarComponent, LoginComponent, SignupComponent],
+  declarations: [AppComponent, AppbarComponent, LoginComponent, SignupComponent, MembershipFormComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
