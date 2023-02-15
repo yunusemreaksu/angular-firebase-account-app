@@ -1,4 +1,4 @@
-<form class="membership-form" #form>
+<form class="membership-form" #form="ngForm">
   <header [innerHTML]="currentRoute === '/login' ? 'Please Login' : 'Please Sign Up'"></header>
   <label for="email">
     <input type="email" name="email" required placeholder="E-mail:">
