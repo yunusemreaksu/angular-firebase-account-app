@@ -5,9 +5,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppbarComponent } from './components/appbar/appbar.component';
+import { LoginComponent } from './containers/login/login.component';
+import { SignupComponent } from './containers/signup/signup.component';
 
 @NgModule({
-  declarations: [AppComponent, AppbarComponent],
+  declarations: [AppComponent, AppbarComponent, LoginComponent, SignupComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
