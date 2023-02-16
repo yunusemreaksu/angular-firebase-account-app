@@ -18,12 +18,17 @@ export class MembershipFormComponent {
 
   constructor(private router: Router) {}
 
-  handleLogin(form: NgForm) {}
+  handleLogin(form: NgForm) {
+    if (form.valid) {
+      this.login.emit(form.value);
+    } else {
+      form.form.markAllAsTouched();
+    }
+  }
 
   handleSignup(form: NgForm) {
     if (form.valid) {
       this.signup.emit(form.value);
-      console.log(form.value);
     } else {
       form.form.markAllAsTouched();
     }

@@ -15,7 +15,7 @@ export class SignupComponent {
 
   onSignup(user: User) {
     this.authService
-      .signup(user)
+      .signup({ ...user, userId: Date.now() })
       .subscribe(() => this.router.navigate(['/', 'login']));
   }
 }
