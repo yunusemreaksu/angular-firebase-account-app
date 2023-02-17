@@ -9,6 +9,8 @@ import { User } from '../models/user.model';
 })
 export class AuthService {
   users: User[] = [];
+  isLoggedIn: boolean = false;
+
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<User[]> {
@@ -48,5 +50,9 @@ export class AuthService {
         this.users = [...this.users, newUser];
       })
     );
+  }
+
+  logout() {
+    return (this.isLoggedIn = false);
   }
 }

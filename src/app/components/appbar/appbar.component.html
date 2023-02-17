@@ -3,7 +3,8 @@
     <a routerLink="/">Home</a>
   </div>
   <div class="right-container">
-    <a routerLink="/login">Login</a>
-    <a routerLink="/signup">Sign Up</a>
+    <a routerLink="/login" *ngIf="checkAuthenticated() == false">Login</a>
+    <a routerLink="/signup" *ngIf="checkAuthenticated() === false">Sign Up</a>
+    <a routerLink="/" *ngIf="checkAuthenticated() === true" (click)="handleLogout()">Logout</a>
   </div>
 </nav>
