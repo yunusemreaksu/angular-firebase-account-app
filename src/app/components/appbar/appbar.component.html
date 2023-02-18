@@ -1,10 +1,12 @@
 <nav class="navbar">
   <div class="left-container">
     <a routerLink="/">Home</a>
+    <a routerLink="/post" *ngIf="hasToken() == true">Post</a>
+    <a routerLink="/posts" *ngIf="hasToken() == true">Posts</a>
   </div>
   <div class="right-container">
-    <a routerLink="/login" *ngIf="checkAuthenticated() == false">Login</a>
-    <a routerLink="/signup" *ngIf="checkAuthenticated() === false">Sign Up</a>
-    <a routerLink="/" *ngIf="checkAuthenticated() === true" (click)="handleLogout()">Logout</a>
+    <a routerLink="/login" *ngIf="hasToken() === false">Login</a>
+    <a routerLink="/signup" *ngIf="hasToken() === false">Sign Up</a>
+    <a routerLink="/" *ngIf="hasToken() == true" (click)="handleLogout()">Logout</a>
   </div>
 </nav>

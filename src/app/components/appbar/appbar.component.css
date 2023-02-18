@@ -5,6 +5,11 @@
   border-bottom: 2px solid black;
 }
 
+.left-container {
+  display: flex;
+  gap: 1rem;
+}
+
 .right-container {
   display: flex;
   gap: 1rem;

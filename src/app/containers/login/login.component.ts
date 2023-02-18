@@ -25,7 +25,8 @@ export class LoginComponent {
   onLogin(user: User) {
     this.authService.login(user).subscribe(() => {
       this.authService.isLoggedIn = true;
-      sessionStorage.setItem('userToken', 'userTokenVal')
+      // sessionStorage.setItem('userToken', 'userTokenVal')
+      // this.authService.token = sessionStorage.getItem('userToken')
       this.router.navigate(['/', 'post']);
     });
   }

@@ -10,6 +10,7 @@ import { User } from '../models/user.model';
 export class AuthService {
   users: User[] = [];
   isLoggedIn: boolean = false;
+  token!: string | null | void
 
   constructor(private http: HttpClient) {}
 
@@ -25,6 +26,8 @@ export class AuthService {
   }
 
   login(user: User) {
+    sessionStorage.setItem('userToken', String(Date.now()));
+    this.token = sessionStorage.getItem('userToken');
     return this.getUsers().pipe(
       map((allUsers) => {
         const matchedUser = Object.values(allUsers).find(
@@ -53,6 +56,8 @@ export class AuthService {
   }
 
   logout() {
-    return (this.isLoggedIn = false);
+    // sessionStorage.clear();
+    // console.log('clear', sessionStorage.clear());
+    return (this.isLoggedIn = false), this.token = sessionStorage.clear();
   }
 }
