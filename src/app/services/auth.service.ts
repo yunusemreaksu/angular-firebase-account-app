@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { map, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { User } from '../models/user.model';
@@ -14,7 +15,7 @@ export class AuthService {
   loggedInUserEmail!: string;
   token!: string | null | void;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getUsers(): Observable<User[]> {
     const headers = new HttpHeaders({
@@ -29,7 +30,7 @@ export class AuthService {
 
   login(user: User) {
     sessionStorage.setItem('userToken', String(Date.now()));
-    this.token = sessionStorage.getItem('userToken');
+    // this.token = sessionStorage.getItem('userToken');
     return this.getUsers().pipe(
       map((allUsers) => {
         const matchedUser = Object.values(allUsers).find(
@@ -47,8 +48,16 @@ export class AuthService {
         }
       })
     );
+  }
 
-    // this.http.post<User>(environment.usersApiUrl, user);
+  checkIsLoggedIn(): boolean {
+    this.token = sessionStorage.getItem('userToken');
+    if (this.token) {
+      return true;
+    } else {
+      this.router.navigate(['/', 'login']);
+      return false;
+    }
   }
 
   signup(user: User) {
