@@ -4,10 +4,10 @@
     <p><span>Title: </span>{{post.title}}</p>
     <p><span>Description: </span>{{post.description}}</p>
     <div class="btn-container" *ngIf="post.userId === userId && editMode === false">
-      <button type="button" (click)="handleEdit()">Edit</button>
+      <button type="button" (click)="navigateEditPage(post.postId)">Edit</button>
       <button type="button" (click)="handleDelete(post)">Delete</button>
     </div>
-    <div class="input-container" *ngIf="editMode === true">
+    <!-- <div class="input-container" *ngIf="editMode === true">
       <p>Please type your new values:</p>
       <input type="text" placeholder="New Title: " name="newTitle" required #newTitle>
       <input type="text" placeholder="New Description: " name="newDescription" required>
@@ -16,6 +16,6 @@
         <button>Confirm</button>
         <button (click)="cancelEditMode()">Cancel</button>
       </div>
-    </div>
+    </div> -->
   </li>
 </ul>

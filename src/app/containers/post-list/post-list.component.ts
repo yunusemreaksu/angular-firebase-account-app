@@ -27,8 +27,9 @@ export class PostListComponent {
     this.userId = this.authService.loggedInUserId;
   }
 
-  handleEdit() {
-    this.editMode = true;
+  navigateEditPage(postId: number) {
+    // this.editMode = true;
+    this.router.navigate(['/', 'posts', `${postId}`]);
   }
 
   handleDelete(post: Post) {

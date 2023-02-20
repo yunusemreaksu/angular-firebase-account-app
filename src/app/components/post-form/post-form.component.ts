@@ -10,10 +10,12 @@ import { Post } from 'src/app/models/post.model';
 export class PostFormComponent {
   @Input() userId!: number;
   @Input() post!: Post;
+  @Input() isEdit!: boolean;
 
   @Output() create = new EventEmitter<Post>();
   @Output() edit = new EventEmitter<Post>();
-  @Output() delete = new EventEmitter<Post>();
+
+  constructor() {}
 
   handleCreate(form: NgForm) {
     if (form.valid) {
@@ -21,11 +23,17 @@ export class PostFormComponent {
         ...form.value,
       });
     } else {
-      form.form.markAllAsTouched;
+      form.form.markAllAsTouched();
     }
   }
 
-  handleEdit(form: NgForm) {}
-
-  handleDelete() {}
+  handleEdit(form: NgForm) {
+    if (form.valid) {
+      this.edit.emit({
+        ...form.value,
+      });
+    } else {
+      form.form.markAllAsTouched();
+    }
+  }
 }

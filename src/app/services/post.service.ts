@@ -9,7 +9,23 @@ import { Post } from '../models/post.model';
 })
 export class PostService {
   posts: Post[] = [];
+  post!: Post;
   constructor(private http: HttpClient) {}
+
+  getPost(postId: string | null): Observable<Post> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    const options = {
+      headers,
+    };
+
+    return this.http.get<Post>(
+      environment.apiUrl + 'posts/' + postId + '.json',
+      options
+    );
+  }
 
   getPosts(): Observable<Post[]> {
     const headers = new HttpHeaders({
@@ -43,11 +59,11 @@ export class PostService {
           this.posts = Object.values(this.posts);
           this.posts = this.posts.map((p: Post) => {
             if (p.postId === post.postId) {
-              return post
+              return post;
             } else {
-              return p
+              return p;
             }
-          })
+          });
         })
       );
   }

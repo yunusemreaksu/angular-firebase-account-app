@@ -1,14 +1,14 @@
 <form class="post-form" #form="ngForm">
   <label for="title">
-    <input type="text" name="title" placeholder="Title:" required #title="ngModel" [ngModel]="post?.title">
+    <input type="text" name="title" placeholder="Title:" required [value]="isEdit === false ? null : post.title"
+      #title="ngModel" [ngModel]="post?.title">
   </label>
   <label for="description">
-    <input type="text" name="description" placeholder="Description:" required #description="ngModel"
-      [ngModel]="post?.description">
+    <input type="text" name="description" placeholder="Description:" required
+      [value]="isEdit === false ? null : post.description" #description="ngModel" [ngModel]="post?.description">
   </label>
   <div class="btn-container">
-    <button type="button" (click)="handleCreate(form)">Create</button>
-    <!-- <button type="button" (click)="handleEdit(form)">Edit</button> -->
-    <!-- <button type="button" (click)="handleDelete()">Delete</button> -->
+    <button type="button" *ngIf="isEdit === false" (click)="handleCreate(form)">Create</button>
+    <button type="button" *ngIf="isEdit === true" (click)="handleEdit(form)">Update</button>
   </div>
 </form>
