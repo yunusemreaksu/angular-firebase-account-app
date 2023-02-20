@@ -1,1 +1,7 @@
-<p>post-list works!</p>
+<ul *ngFor="let post of posts">
+  <li>
+    <p><span>User: </span>{{post.userEmail}}</p>
+    <p><span>Title: </span>{{post.title}}</p>
+    <p><span>Description: </span>{{post.description}}</p>
+  </li>
+</ul>

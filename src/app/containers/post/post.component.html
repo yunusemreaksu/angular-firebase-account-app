@@ -1,1 +1,2 @@
-<app-post-form></app-post-form>
+<app-post-form [userId]="userId" [post]="post" (create)="onCreate($event)" (edit)="onEdit($event)"
+  (delete)="onDelete($event)"></app-post-form>

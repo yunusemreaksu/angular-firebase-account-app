@@ -10,7 +10,9 @@ import { User } from '../models/user.model';
 export class AuthService {
   users: User[] = [];
   isLoggedIn: boolean = false;
-  token!: string | null | void
+  loggedInUserId!: number;
+  loggedInUserEmail!: string;
+  token!: string | null | void;
 
   constructor(private http: HttpClient) {}
 
@@ -37,6 +39,8 @@ export class AuthService {
         // console.log(matchedUser.find((u) => u.email === user.email));
 
         if (matchedUser) {
+          this.loggedInUserId = matchedUser.userId;
+          this.loggedInUserEmail = matchedUser.email;
           return matchedUser;
         } else {
           throw new Error('Incorrect email or password!');
@@ -58,6 +62,6 @@ export class AuthService {
   logout() {
     // sessionStorage.clear();
     // console.log('clear', sessionStorage.clear());
-    return (this.isLoggedIn = false), this.token = sessionStorage.clear();
+    return (this.isLoggedIn = false), (this.token = sessionStorage.clear());
   }
 }
