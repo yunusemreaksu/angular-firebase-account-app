@@ -25,11 +25,43 @@ export class PostService {
 
   create(payload: Post) {
     return this.http
-      .post<Post>(environment.postsApiUrl, payload)
+      .put<Post>(
+        environment.apiUrl + 'posts/' + payload.postId + '.json',
+        payload
+      )
       .pipe(tap((post) => (this.posts = [...this.posts, post])));
   }
 
-  edit() {}
+  edit(payload: Post) {
+    return this.http
+      .patch<Post>(
+        environment.apiUrl + 'posts/' + payload.postId + '.json',
+        payload
+      )
+      .pipe(
+        tap((post) => {
+          this.posts = Object.values(this.posts);
+          this.posts = this.posts.map((p: Post) => {
+            if (p.postId === post.postId) {
+              return post
+            } else {
+              return p
+            }
+          })
+        })
+      );
+  }
 
-  delete() {}
+  delete(payload: Post) {
+    return this.http
+      .delete<Post>(environment.apiUrl + 'posts/' + payload.postId + '.json')
+      .pipe(
+        tap(() => {
+          this.posts = Object.values(this.posts);
+          this.posts = this.posts.filter(
+            (post: Post) => post.postId !== payload.postId
+          );
+        })
+      );
+  }
 }

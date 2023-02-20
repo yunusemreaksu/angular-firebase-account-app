@@ -17,10 +17,16 @@ const routes: Routes = [
   {
     path: 'post',
     component: PostComponent,
+    data: { isEdit: false },
   },
   {
     path: 'posts',
     component: PostListComponent,
+  },
+  {
+    path: 'posts/:postId',
+    component: PostComponent,
+    data: { isEdit: true },
   },
 ];
 

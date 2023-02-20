@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Post } from 'src/app/models/post.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({
@@ -9,11 +11,33 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class PostListComponent {
   posts!: Post[];
-  constructor(private postService: PostService) {}
+  userId!: number;
+  editMode = false;
+  constructor(
+    private postService: PostService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.postService.getPosts().subscribe((posts: Post[]) => {
+    this.postService.getPosts().subscribe((posts) => {
       this.posts = Object.values(posts);
     });
+
+    this.userId = this.authService.loggedInUserId;
+  }
+
+  handleEdit() {
+    this.editMode = true;
+  }
+
+  handleDelete(post: Post) {
+    this.postService.delete(post).subscribe(() => {
+      window.location.reload();
+    });
+  }
+
+  cancelEditMode() {
+    this.editMode = false;
   }
 }
